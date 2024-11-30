@@ -5,7 +5,6 @@ import requests
 BASE_URL = "https://api.themoviedb.org/3"
 API_KEY = "393154c2e4ea2fbe26dd7e7aabf21a9b"  # TMDb에서 발급받은 API 키 입력
 
-# 사용자 CRUD
 def create_user(data):
     """사용자 생성"""
     username = data["username"]
@@ -61,7 +60,6 @@ def fetch_genres():
 def fetch_movies_and_save(pages=5):
     """
     TMDb API에서 영화 데이터를 가져와 MongoDB에 저장합니다.
-    1 페이지당 약 20개의 영화가 반환되므로, 5페이지를 가져오면 약 100편 저장.
     """
     genres_map = fetch_genres()  # 장르 ID -> 이름 매핑 생성
     total_movies_saved = 0
@@ -95,7 +93,7 @@ def fetch_movies_and_save(pages=5):
             print(f"Failed to fetch movies from page {page}: {response.status_code}")
             break
 
-    print(f"Total movies saved to MongoDB: {total_movies_saved}")
+    print(f"DB에 영화가 저장되었습니다.: {total_movies_saved}")
     return total_movies_saved
 
 def get_movies():
@@ -149,12 +147,12 @@ def get_recommendations(favorite_movies, similarity_df, top_n=5):
     Returns:
         list: 추천 영화 제목 리스트.
     """
-    # 모든 선호 영화와 유사한 영화 수집
+    # 선호 영화의 장르와 유사한 영화 수집
     all_similar_movies = pd.Series(dtype="float64")
     
     for movie in favorite_movies:
         if movie in similarity_df.index:
-            # 각 영화와 유사한 영화를 합산 (중복 허용)
+            # 각 영화와 유사한 영화를 합산
             all_similar_movies = all_similar_movies.add(
                 similarity_df[movie], fill_value=0
             )

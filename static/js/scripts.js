@@ -24,8 +24,8 @@ async function deleteAccount() {
                 alert(`Error: ${errorData.error}`);
             }
         } catch (error) {
-            console.error("Error deleting account:", error);
-            alert("An error occurred. Please try again.");
+            console.error("회원탈퇴 실패:", error);
+            alert("다시 시도해주십시오.");
         }
     }
 }
@@ -38,7 +38,7 @@ async function addFavorite(title) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title })
     });
-    alert(`${title} added to favorites!`);
+    alert(`${title} 선호 영화에 추가되었습니다!`);
     window.location.reload(); // 페이지 새로고침
 }
 
@@ -49,7 +49,7 @@ async function removeFavorite(title) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title })
     });
-    alert(`${title} removed from favorites!`);
+    alert(`${title} 선호 영화에서 제거되었습니다.`);
     window.location.reload(); // 페이지 새로고침
 }
 
@@ -126,18 +126,18 @@ async function updateFavorite(action, title) {
                 recommendationsContainer.appendChild(movieDiv);
             });
         } else {
-            recommendationsContainer.innerHTML = "<p>No recommendations available.</p>";
+            recommendationsContainer.innerHTML = "<p>추천 가능한 영화가 없습니다.</p>";
         }
         window.location.reload(); // 페이지 새로고침
     } catch (error) {
-        console.error("Error updating favorites:", error);
-        alert("An unexpected error occurred. Please try again.");
+        console.error("업데이트 실패:", error);
+        alert("다시 시도해주세요.");
     }
 }
 
 
 
-// Delete account
+// 계정 삭제
 async function deleteAccount() {
     const response = await fetch("/users/delete_account", { method: "POST" });
     const data = await response.json();
@@ -182,7 +182,7 @@ async function login() {
 
     const response = await apiCall("/users/login", "POST", { username, password });
     if (response.message) {
-        alert("Login successful!");
+        alert("로그인 성공!");
         window.location.href = "/movies"; // 영화 목록 페이지로 이동
     } else {
         alert(response.error);

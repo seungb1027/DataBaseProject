@@ -110,7 +110,7 @@ def favorites_page():
         if favorites:
             similarity_df = calculate_genre_similarity()
 
-            # 선호 영화 목록 기반 추천 영화 생성
+            # 선호 영화 기반 추천 영화 5개 생성
             recommended_movies = get_recommendations(favorites, similarity_df, top_n=5)
 
             # 추천 영화 데이터를 MongoDB에서 가져오기
@@ -127,7 +127,7 @@ def favorites_page():
     if favorites:
         similarity_df = calculate_genre_similarity()
 
-        # 선호 영화 목록 기반 추천 영화 생성
+        # 선호 영화 기반 추천 영화 5개 생성
         recommended_movies = get_recommendations(favorites, similarity_df, top_n=5)
 
         # 추천 영화 데이터를 MongoDB에서 가져오기
@@ -148,7 +148,7 @@ def add_favorite_movie():
         return jsonify({"error": "Not logged in"}), 403
     data = request.json
     add_favorite(session["username"], data["title"])
-    return jsonify({"message": "Movie added to favorites"})
+    return jsonify({"message": "선호 영화에 추가되었습니다."})
 
 @movies_bp.route("/remove_favorite", methods=["POST"])
 def remove_favorite_movie():
@@ -156,5 +156,5 @@ def remove_favorite_movie():
         return jsonify({"error": "Not logged in"}), 403
     data = request.json
     remove_favorite(session["username"], data["title"])
-    return jsonify({"message": "Movie removed from favorites"})
+    return jsonify({"message": "선호 영화에서 제거되었습니다."})
 
