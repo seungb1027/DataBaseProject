@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ movie.title }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div id="header">
+        <span>사용자: {{ username }}</span>
+        <button class="navigate" onclick="navigate('/movies')">영화 목록</button>
+        <button class="logout" onclick="logout()">로그아웃</button>
+        <button class="delete" onclick="deleteAccount()">회원 탈퇴</button>
+    </div>
+    <div id="movie-info">
+        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+        <h1>{{ movie.title }}</h1>
+        <p>장르: {{ movie.genres | join(", ") }}</p>
+        <p>평점: {{ movie.rating }}</p>
+        <p>{{ movie.overview }}</p>
+        <button onclick="addFavorite('{{ movie.title }}')">선호 영화에 추가</button>
+    </div>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>

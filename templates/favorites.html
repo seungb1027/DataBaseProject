@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>선호 영화</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div id="header">
+        <span>사용자: {{ username }}</span>
+        <button class="navigate" onclick="navigate('/movies')">영화 목록</button>
+        <button class="logout" onclick="logout()">로그아웃</button>
+        <button class="delete" onclick="deleteAccount()">회원 탈퇴</button>
+    </div>
+
+    <h1>선호 영화 목록</h1>
+    <div id="favorites" class="scroll-container">
+        {% for movie in favorites %}
+        <div class="movie">
+            <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+            <h3>{{ movie.title }}</h3>
+            <p>평점: {{ movie.rating }}</p>
+            <button onclick="updateFavorite('remove', '{{ movie.title }}')">선호 영화 제거</button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>추천 영화</h2>
+    <div id="recommendations" class="scroll-container">
+        {% for movie in recommendations %}
+        <div class="movie">
+            <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+            <h3>{{ movie.title }}</h3>
+            <p>평점: {{ movie.rating }}</p>
+            <button onclick="updateFavorite('add', '{{ movie.title }}')">선호 영화에 추가</button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="/static/js/scripts.js?ver=1"></script>
+</body>
+</html>
