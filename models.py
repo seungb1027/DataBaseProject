@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 import requests
 
 BASE_URL = "https://api.themoviedb.org/3"
-API_KEY = "393154c2e4ea2fbe26dd7e7aabf21a9b"  # TMDb에서 발급받은 API 키 입력
+API_KEY = ""  # TMDb에서 발급받은 API 키 입력
 
 def create_user(data):
     """사용자 생성"""
