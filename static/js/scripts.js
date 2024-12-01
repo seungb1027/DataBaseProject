@@ -53,44 +53,6 @@ async function removeFavorite(title) {
     window.location.reload(); // 페이지 새로고침
 }
 
-// async function updateFavorite(action, title) {
-//     try {
-//         const response = await fetch("/favorites", {
-//             method: "POST",
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify({ action, title })
-//         });
-
-//         const data = await response.json();
-
-//         if (response.ok) {
-//             alert(data.message);
-
-//             // 추천 영화 목록 업데이트
-//             const recommendationsContainer = document.getElementById("recommendations");
-//             recommendationsContainer.innerHTML = ""; // 기존 추천 목록 삭제
-
-//             // 새로운 추천 목록 추가
-//             data.recommendations.forEach((movie) => {
-//                 const movieDiv = document.createElement("div");
-//                 movieDiv.className = "movie";
-//                 movieDiv.innerHTML = `
-//                     <img src="${movie.poster_url}" alt="${movie.title}">
-//                     <h3>${movie.title}</h3>
-//                     <p>Rating: ${movie.rating}</p>
-//                     <button onclick="updateFavorite('add', '${movie.title}')">Add to Favorites</button>
-//                 `;
-//                 recommendationsContainer.appendChild(movieDiv);
-//             });
-//         } else {
-//             alert(data.error || "Something went wrong!");
-//         }
-//     } catch (error) {
-//         console.error("Error updating favorites:", error);
-//         alert("Failed to update favorites. Please try again.");
-//     }
-// }
-
 async function updateFavorite(action, title) {
     try {
         const response = await fetch("/movies/favorites", {
